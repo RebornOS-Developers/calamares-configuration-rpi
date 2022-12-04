@@ -1,10 +1,10 @@
 # Maintainer: shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname=calamares-configuration-rpi-local
-pkgver=v0.0.18.r4.ga540bee
+pkgver=r499.87d1927
 pkgrel=1
 
-arch=('aarch64')
+arch=('any')
 pkgdesc='Configuration for the RebornOS Calamares installer.'
 url='https://github.com/RebornOS-Developers/calamares-configuration'
 license=('GPL3')
@@ -103,13 +103,12 @@ package() {
             -exec \
                 install -Dm 700 "{}" "${pkgdir}/$TARGET_DIRECTORY_STUB/{}" \;
     )
-    (   # -------------------
-        # Copy local packages
-        # -------------------
-        cd "$DIST_DIRECTORY" && \
-        find local_packages \
+    (
+        cd "$PROJECT_DIRECTORY" && \
+        find pre_install \
             -type f \
             -exec \
-                install -Dm 700 "{}" "${pkgdir}/$TARGET_DIRECTORY_STUB/{}" \;
+                install -Dm 755 "{}" "${pkgdir}/usr/lib/calamares/modules/pre_install/{}" \;
     )
+
 }

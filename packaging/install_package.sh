@@ -5,7 +5,7 @@ PROJECT_DIRECTORY="$(dirname -- "$SCRIPT_DIRECTORY")"
 BUILD_DIRECTORY="$PROJECT_DIRECTORY"/build
 PACKAGE_DIRECTORY_STUB="calamares-configuration"
 MODE="$(echo "$1" | tr "[:upper:]" "[:lower:]")"
-if [ "$MODE" != "stable" ] && [ "$MODE" != "git" ] && [ "$MODE" != "local" ]; then
+if [ "$MODE" != "stable" ] && [ "$MODE" != "local" ]; then
     echo ""
     echo "ERROR: Please specify \"stable\", \"git\", or \"local\" as the first argument to this script, to indicate the mode to run this script in."
     exit 1
