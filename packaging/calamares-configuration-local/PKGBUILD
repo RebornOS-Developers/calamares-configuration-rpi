@@ -1,10 +1,10 @@
 # Maintainer: shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
-pkgname=calamares-configuration-local
-pkgver=v0.1.2.r4.ga540bee
-pkgrel=2
+pkgname=calamares-configuration-rpi-local
+pkgver=v0.0.18.r4.ga540bee
+pkgrel=1
 
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('aarch64')
 pkgdesc='Configuration for the RebornOS Calamares installer.'
 url='https://github.com/RebornOS-Developers/calamares-configuration'
 license=('GPL3')

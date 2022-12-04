@@ -45,10 +45,9 @@ def main():
 
     config: Dict = load_configuration()
 
-    copy_files()
 
-    if are_installed(NVIDIA_PACKAGES):
-        add_nvidia_modeset()
+    # if are_installed(NVIDIA_PACKAGES):
+    #     add_nvidia_modeset()
 
     configure_desktops(config=config)
 
@@ -59,6 +58,8 @@ def main():
         config=config
     )
 
+    
+        
     set_display_manager_defaults(
         desktop=default_desktop,
         config=config
@@ -95,30 +96,6 @@ def load_configuration() -> Dict:
             logging.debug("Configuration file successfully parsed...")
             return config
 
-
-def copy_files():
-    logging.info(
-        "Copying the contents of \"/var/tmp/post_install/rootfs\" to \"/\" (root)...")
-    shutil.copytree(
-        src="rootfs",
-        dst="/",
-        dirs_exist_ok=True,
-    )
-
-def add_nvidia_modeset():
-    with open("/etc/default/grub", 'r') as f:
-        config_lines = f.readlines()
-
-    for index, config_line in enumerate(config_lines):
-        config_line = config_line.strip()
-        if config_line.startswith("GRUB_CMDLINE_LINUX=") and "nvidia-drm.modeset=1" not in config_line:
-            kernel_parameters = config_line.split("=")[1]
-            kernel_parameters = kernel_parameters.strip('\" ') + " nvidia-drm.modeset=1"
-            kernel_parameters = kernel_parameters.strip()
-            config_lines[index] = f"GRUB_CMDLINE_LINUX=\"{kernel_parameters}\"\n"
-    
-    with open("/etc/default/grub", 'w') as f:
-        f.writelines(config_lines)
 
 def get_default_display_manager(config: Dict) -> Dict:
     logging.info("Determining the default Display Manager...")

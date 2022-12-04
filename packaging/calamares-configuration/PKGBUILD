@@ -1,10 +1,10 @@
 # Maintainer: shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
-pkgname=calamares-configuration
-pkgver=0.1.2
-pkgrel=2
+pkgname=calamares-configuration-rpi
+pkgver=0.0.18
+pkgrel=1
 
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+arch=('aarch64')
 pkgdesc='Configuration for the RebornOS Calamares installer.'
 url='https://github.com/RebornOS-Developers/calamares-configuration'
 license=('GPL3')
@@ -12,10 +12,11 @@ depends=('python' 'python-yaml')
 optdepends=('calamares')
 provides=('calamares-config')
 conflicts=('calamares-configuration' 'calamares-configuration-git' 'calamares-configuration-local')
+replaces=('calamares-configuration')
 md5sums=('SKIP')
 makedepends=() 
 
-source=("https://github.com/RebornOS-Developers/calamares-configuration/archive/refs/tags/v${pkgver}.tar.gz")
+source=("https://github.com/RebornOS-Developers/calamares-configuration-rpi/archive/refs/tags/v${pkgver}.tar.gz")
 
 package() {
     PROJECT_DIRECTORY="${srcdir}/calamares-configuration-${pkgver}"

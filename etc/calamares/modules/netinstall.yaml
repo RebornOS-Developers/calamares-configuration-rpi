@@ -1,98 +1,3 @@
-- name: Required
-  description: Required by the current installer
-  selected: true
-  critical: true
-  immutable: true
-  subgroups:
-    - name: Filesystems
-      description: Support for various filesystems
-      selected: true
-      critical: true
-      immutable: true
-      subgroups: 
-        - name: exFAT
-          description: exFAT support
-          selected: true
-          critical: true
-          immutable: true
-          packages: 
-            - exfatprogs
-            - exfat-utils
-        # - name: APFS
-        #   description: (AUR) APFS support
-        #   selected: true
-        #   critical: true
-        #   immutable: true          
-        #   packages: 
-        #     - linux-apfs-rw-dkms-git
-        #     - apfsprogs-git
-        # - name: Bcachefs
-        #   description: (AUR) Bcachefs support
-        #   selected: true
-        #   critical: true
-        #   immutable: true          
-        #   packages: 
-        #     - linux-bcachefs-git
-        #     - bcachefs-tools-git
-        # - name: ZFS
-        #   description: (AUR) ZFS support
-        #   selected: true
-        #   critical: true
-        #   immutable: true          
-        #   packages: 
-        #     - zfs-linux
-        #     - zfs-dkms
-        #     - zfs-utils
-      packages:           
-          - name: dosfstools
-            description: VFAT support
-          - name: e2fsprogs
-            description: ext3 and ext4 support
-          - name: ntfs-3g
-            description: NTFS support          
-          - name: btrfs-progs
-            description: BTRFS support
-          - name: xfsprogs
-            description: XFS support
-          # - name: reiserfsprogs
-          #   description: ReiserFS support
-          - name: f2fs-tools
-            description: F2FS support
-          # - name: hfsprogs
-          #   description: HFS and HFS+ support          
-          - name: jfsutils
-            description: JFS support
-          # - name: nilfs-utils
-          #   description: NILFS2 support          
-          # - name: udftools
-          #   description: UDF support
-          # - name: reiser4progs
-          #   description: Reiser4 support
-  packages:
-    - name: linux
-      description: The latest Linux kernel release
-    - name: linux-firmware
-      description: Firmware files for Linux
-    - name: mkinitcpio
-      description: Script to create the initial ramdisk. Required to re-run after configuring LVM, system encryption, or RAID
-    - name: grub
-      description: Bootloader required by the current installer version. Will be removed when bootloader is chosen and installed dynamically.
-    - name: efibootmgr
-      description: Required by the installer to setup the bootloader
-    - name: os-prober
-      description: For detecting other operating systems
-    - name: amd-ucode
-      description: Microcode update image for AMD CPUs. Required currently in bootloader.conf
-    - name: intel-ucode 
-      description: Microcode update files for Intel CPUs. Required currently in bootloader.conf
-    - name: sudo
-      description: Currently a hard dependency for the users module
-    - name: networkmanager
-      description: Currently hardcoded into the installer
-    - name: python
-      description: For running the post-install script
-    - name: python-yaml
-      description: For running the post-install script
 - name: Minimal Base
   description: Essential packages. Modify at your own risk
   selected: true
@@ -110,12 +15,10 @@
           description: A script to get system information
         - name: gnu-netcat
           description: Network piping application. Does not support IPv6 (Required for termbin)
+        - name: base-devel
+          description: Required to build packages
         - name: network-manager-applet
           description: Applet for managing network connections
-        - name: pciutils
-          description: PCI bus configuration space access library and tools
-        - name: usbutils    
-          description: A collection of USB tools to query connected USB devices          
       subgroups:
         - name: Theming and Customization
           subgroups:
@@ -140,8 +43,6 @@
               description: Graphical package management
     - name: Backend System
       packages: 
-        - name: base-devel
-          description: Required to build packages      
         - name: polkit
           description: Application development toolkit for controlling system-wide privileges      
         - name: xdg-user-dirs
@@ -177,8 +78,8 @@
               packages:
                 - name: pipewire
                   description: Low-latency audio/video router and processor
-                - name: lib32-pipewire
-                  description: For PipeWire with 32-bit support 
+                # - name: lib32-pipewire
+                #  description: For PipeWire with 32-bit support 
                 - name: pipewire-alsa
                   description: For PipeWire to manage ALSA as well
                 - name: pipewire-pulse
@@ -221,28 +122,6 @@
               description: A thin wrapper around libinput for input devices in X
             - name: xorg-xinput
               description: Tools to configure devices at runtime 
-        - name: Virtualization (as Guest)
-          description: Run RebornOS on a VM
-          subgroups:
-            - name: VirtualBox
-              packages: 
-                - name: virtualbox-guest-utils
-                  description: VirtualBox Guest utilities with X support
-            - name: VMWare
-              packages: 
-                - name: open-vm-tools
-                  description: Suite of open source virtualization utilities and drivers
-                - name: gtkmm3
-                  description: C++ bindings for GTK+ 3
-                - name: xf86-video-vmware
-                  description: X.org vmware video driver
-                - name: xf86-input-vmmouse
-                  description: X.org VMWare Mouse input driver
-                - name: mesa
-                  description: Open-source implementation of the OpenGL specification
-            - name: QEMU
-              packages: 
-                - qemu-guest-agent   
 - name: RebornOS
   selected: true
   subgroups:
@@ -252,465 +131,211 @@
         - rebornos-keyring
         - rebornos-mirrorlist
         - rebornos-os-release
-        - rebornos-logo 
-        - grub2-theme-vimix-git
+        - rebornos-logo
     - name: RebornOS Applications      
       packages:         
-        - name: rebornos-fire
-          description: Our flagship app. Install desktops, display manager, kernels, and more!
+        # - name: rebornos-fire
+        #   description: Our flagship app. Install desktops, display manager, kernels, and more!
         - name: rebornos-welcome
           description: To get you started with RebornOS
-        - name: refresh-mirrors
-          description: Script and one-click icon to refresh your mirrors
+        # - name: refresh-mirrors
+        #   description: Script and one-click icon to refresh your mirrors
 - name: Backend System
-  description: Behind-the-scenes working of your Operating System
+  description: Behind-the-scenes working of your Operating System  
   noncheckable: true
-  expanded: false
   selected: false
   packages: 
-    - name: base-devel
-      description: Required to build packages   
     - name: polkit
-      description: Application development toolkit for controlling system-wide privileges
+      description: Application development toolkit for controlling system-wide privileges      
     - name: xdg-user-dirs
       description: Common directories for desktops
     - name: xdg-desktop-portal
       description: D-Bus APIs for containerized apps
     - name: xdg-desktop-portal-gtk
-      description: XDG Desktop Portal for GTK    
+      description: XDG Desktop Portal for GTK
     - name: accountsservice
       description: D-Bus interface for user account query and manipulation
     - name: packagekit
-      description: A system designed to make installation and updates of packages easier      
-  subgroups: 
-  - name: Kernels
-    description: Other variations of the Linux kernel
-    noncheckable: true
-    packages: 
-      - name: linux
-        description: The latest Linux kernel release
-      - name: linux-headers
-        description: Headers and scripts for building modules for the Linux kernel
-      - name: linux-lts
-        description: The more stable long-term-support kernel
-      - name: linux-lts-headers
-        description: Headers and scripts for building modules for the LTS Linux kernel
-      - name: linux-zen
-        description: The Linux Zen kernel and modules
-      - name: linux-zen-headers
-        description: Headers and scripts for building modules for the Linux Zen kernel
-  - name: Display
-    noncheckable: true
-    subgroups: 
-      - name: Xorg
-        description: The X display server
+      description: A system designed to make installation and updates of packages easier
+  subgroups:
+    - name: Display
+      noncheckable: true
+      subgroups: 
+        - name: Xorg
+          description: The X display server
+          packages:
+            - name: xorg-server
+        - name: Wayland
+          packages: 
+            - name: xorg-xwayland 
+              description: Run X clients under wayland
+    - name: Graphics
+      noncheckable: true
+      packages: 
+        - name: mesa
+          description: Open-source implementation of OpenGL specification
+      subgroups:
         packages:
-          - name: xorg-server
-            description: X server
-          - name: xorg-server-common
-            description: X server common files
-        subgroups:
-          - name: xorg-apps
-            packages:
-              - name: xorg-bdftopcf 
-                description: Convert X font from Bitmap Distribution Format to Portable Compiled Format 
-              - name: xorg-iceauth  
-                description: ICE authority file utility 
-              - name: xorg-mkfontscale  
-                description: Create an index of scalable font files for X 
-              - name: xorg-sessreg  
-                description: Register X sessions in system utmp/utmpx databases 
-              - name: xorg-setxkbmap  
-                description: Set the keyboard using the X Keyboard Extension 
-              - name: xorg-smproxy  
-                description: Allows X applications that do not support X11R6 session management to participate in an X11R6 session 
-              - name: xorg-x11perf  
-                description: Simple X server performance benchmarker 
-              - name: xorg-xauth  
-                description: X.Org authorization settings program 
-              - name: xorg-xbacklight 
-                description: RandR-based backlight control application 
-              - name: xorg-xcmsdb 
-                description: Device Color Characterization utility for X Color Management System 
-              - name: xorg-xcursorgen 
-                description: Create an X cursor file from PNG images 
-              - name: xorg-xdpyinfo 
-                description: Display information utility for X 
-              - name: xorg-xdriinfo 
-                description: Query configuration information of DRI drivers 
-              - name: xorg-xev  
-                description: Print contents of X events 
-              - name: xorg-xgamma 
-                description: Alter a monitor's gamma correction 
-              - name: xorg-xhost  
-                description: Server access control program for X 
-              - name: xorg-xinput 
-                description: Small commandline tool to configure devices 
-              - name: xorg-xkbcomp  
-                description: X Keyboard description compiler 
-              - name: xorg-xkbevd 
-                description: XKB event daemon 
-              - name: xorg-xkbutils 
-                description: XKB utility demos 
-              - name: xorg-xkill  
-                description: Kill a client by its X resource 
-              - name: xorg-xlsatoms 
-                description: List interned atoms defined on server 
-              - name: xorg-xlsclients 
-                description: List client applications running on a display 
-              - name: xorg-xmodmap  
-                description: Utility for modifying keymaps and button mappings 
-              - name: xorg-xpr  
-                description: Print an X window dump from xwd 
-              - name: xorg-xprop  
-                description: Property displayer for X 
-              - name: xorg-xrandr 
-                description: Primitive command line interface to RandR extension 
-              - name: xorg-xrdb 
-                description: X server resource database utility 
-              - name: xorg-xrefresh 
-                description: Refresh all or part of an X screen 
-              - name: xorg-xset 
-                description: User preference utility for X 
-              - name: xorg-xsetroot 
-                description: Classic X utility to set your root window background to a given pattern or color 
-              - name: xorg-xvinfo 
-                description: Prints out the capabilities of any video adaptors associated with the display that are accessible through the X-Video extension 
-              - name: xorg-xwd  
-                description: X Window System image dumping utility 
-              - name: xorg-xwininfo 
-                description: Command-line utility to print information about windows on an X server 
-              - name: xorg-xwud 
-                description: X Window System image undumping utility
-          - name: xorg fonts
-            packages:
-              - name: xorg-font-util
-                description: X.Org font utilities
-              - name: xorg-fonts-75dpi
-                description: X.org 75dpi fonts
-              - name: xorg-fonts-100dpi
-                description: X.org 100dpi fonts
-              - name: xorg-fonts-encodings
-                description: X.org font encoding files
-              - name: xorg-mkfontscale
-                description: Create an index of scalable font files for X
-      - name: Wayland
-        packages: 
-          - name: xorg-xwayland 
-            description: Run X clients under wayland 
-          - name: qt5-wayland 
-            description: Wayland support on Qt5
-          - name: qt6-wayland 
-            description: Wayland support on Qt6
-  - name: Graphics
-    noncheckable: true
-    packages: 
-      - name: mesa
-        description: Open-source implementation of OpenGL specification
-    subgroups:
-      - name: Nvidia Drivers
-        description: For Nvidia GPUs  
-        noncheckable: true   
-        packages:
-          - name: nvidia-settings
-            description: Tool to configure Nvidia drivers (needs Nvidia drivers)
-          - name: lib32-nvidia-utils
-            description: For 32-bit application support
-          - name: nvidia
-            description: For Maxwell (NV110/GMXXX) series and newer with linux kernel
-          - name: nvidia-lts
-            description: For Maxwell (NV110/GMXXX) series and newer with linux-lts kernel
-          - name: nvidia-dkms
-            description: For Maxwell (NV110/GMXXX) series and newer with a custom kernel 
-          # - name: nvidia-beta
-          #   description: (AUR) Newer drivers
-          - name: nvidia-open
-            description: For Turing (NV160/TUXXX) series and newer with linux kernel
-          - name: nvidia-open-dkms
-            description: For Turing (NV160/TUXXX) series and newer with custom kernel
-          - name: nvidia-470xx-dkms
-            description: For Kepler (NVE0/GKXXX) series
-          - name: nvidia-390xx-dkms
-            description: For Fermi (NVC0/GF1XX) series
-          - name: nvidia-340xx-dkms
-            description: (Unsupported) For Tesla (NV50/G80-90-GT2XX) series
-        subgroups: 
-          - name: Nvidia Hybrid
-            description: Nvidia Discrete with other integrated GPUs
-            noncheckable: true
-            subgroups:
-              - name: PRIME Render Offload
-                packages:
-                  - name: nvidia-prime
-                    description: Prime Render Offload configuration and utilities
-                  - xf86-video-amdgpu
-                  - xf86-video-intel
-              # - name: Nvidia-xrun
-              #   packages:
-              #     - name: nvidia-xrun-git
-              #       description: (AUR) Script to run dedicated X server with discrete nvidia graphics (git version)
-              #     - name: nvidia-xrun
-              #       description: (AUR) Old method, uses bumblebee to switch off the dGPU
-              - name: Bumblebee
-                packages:
-                  - name: bumblebee
-                    description: The main package providing the daemon and client programs
-                  - name: mesa
-                    description: An open-source implementation of the OpenGL specification
-                  - name: xf86-video-intel
-                    description: Intel Xorg driver.
-                  - name: lib32-virtualgl
-                    description: A render/display bridge for 32 bit applications
-                  - lib32-nvidia-utils
-                  # - lib32-nvidia-340xx-utils
-              # - name: Optimus manager
-              #   packages:
-              #     - optimus-manager
-              # - name: EnvyControl
-              #   packages:
-              #     - envycontrol
-              # - name: Nvidia-eXec
-              #   packages:
-              #     - name: nvidia-exec
-              #       post-install: "systemctl enable nvx"
-      - name: AMD Drivers
-        description: For AMD GPUs
-        noncheckable: true
-        packages:
-          - name: mesa
-            description: DRI driver for 3D acceleration
-          - name: lib32-mesa
-            description: For 32-bit application support
-          # - mesa-git
-          # - lib32-mesa-git
-          - name: xf86-video-amdgpu
-            description: DDX driver for 2D acceleration in Xorg
-          # - xf86-video-amdgpu-git
-          - name: vulkan-radeon
-            description: Radeon's Vulkan mesa driver
-          - name: lib32-vulkan-radeon
-            description: Radeon's Vulkan mesa driver with 32-bit support
-          - name: amdvlk
-            description: AMD's standalone Vulkan driver
-          - name: lib32-amdvlk
-            description: AMD's standalone Vulkan driver with 32bit support
-          - name: libva-mesa-driver
-            description: Accelerated video decoding for VA-API
-          - name: lib32-libva-mesa-driver
-            description: Accelerated video decoding for VA-API with 32-bit support
-          - name: mesa-vdpau 
-            description: Accelerated video decoding for VDPAU
-          - name: lib32-mesa-vdpau
-            description: Accelerated video decoding for VDPAU with 32-bit support
-          - name: xf86-video-ati
-            description: DDX driver for 2D acceleration in Xorg
-  - name: Audio
-    noncheckable: true
-    packages:
-      - name: pavucontrol
-        description: Simple GTK volume control tool ("mixer")
-    subgroups:
-      - name: Pipewire
-        description:
-        packages:
-          - name: pipewire
-            description: Low-latency audio/video router and processor
-          - name: lib32-pipewire
-            description: For PipeWire with 32-bit support 
-          - name: pipewire-alsa
-            description: For PipeWire to manage ALSA as well
-          - name: pipewire-pulse
-            description: For PipeWire bluetooth support
-          - name: pipewire-jack
-            description: For PipeWire JACK sink, source and jackdbus detection
-          - name: lib32-pipewire-jack
-            description: For 32-bit PipeWire JACK sink, source and jackdbus detection
-          - xdg-desktop-portal
-          - xdg-desktop-portal-gnome
-          - xdg-desktop-portal-kde
-          - xdg-desktop-portal-wlr
-      - name: PulseAudio
-        description:
-        packages:
-          - name: pulseaudio
-            description: A featureful, general-purpose sound server 
-          - name: pulseaudio-alsa
-            description: For PulseAudio to manage ALSA as well
-          - name: pulseaudio-bluetooth
-            description: For PulseAudio bluetooth support
-          - name: pulseaudio-equalizer
-            description: For PulseAudio equalizer sink (qpaeq)
-          - name: pulseaudio-jack
-            description: For JACK sink, source and jackdbus detection
-          - name: pulseaudio-lirc
-            description: For PulseAudio infrared volume control with LIRC
-          - name: pulseaudio-zeroconf
-            description: For PulseAudio Zeroconf (Avahi/DNS-SD) support
-  - name: Network
-    noncheckable: true
-    subgroups:
-      - name: VPN
-        description: Virtual Private Network support
-        packages:
-          - name: openvpn
-            description: Connect to OpenVPN VPNs
-          - name: openconnect
-            description: Supports Cisco and Juniper VPNs
-          - name: wireguard-tools
-            description: Next generation secure network tunnel
-          - name: pptpclient
-            description: Client for the proprietary Microsoft Point-to-Point Tunneling Protocol
-      - name: Realtek Drivers
-        noncheckable: true
-        packages: 
-          - rtl8723bu-git-dkms
-          - rtl8812au-dkms-git
-          - rtl8814au-aircrack-dkms-git
-          - rtl8814au-dkms-git
-          - rtl8821ce-dkms-git
-          - rtl8821cu-dkms-git
-          - rtl88x2bu-dkms-git
-          - rtl88xxau-aircrack-dkms-git        
-      - name: Broadcom Drivers
-        noncheckable: true
-        subgroups:
-          - name: b43
-            packages:               
-              - b43-firmware
-              # - b43-firmware-classic
-              # - b43legacy-firmware
-          - name: broadcom-wl
-            packages:               
-              - broadcom-wl
-              - broadcom-wl-dkms
-  - name: Bluetooth        
-    packages:
-      - name: bluez
-        description: The Bluetooth protocol stack
-      - name: bluez-utils
-        description: Development and debugging utilities for bluez
-      - name: blueman
-        description: A full featured Bluetooth manager
-  - name: Printing
-    packages:
-      - name: cups
-        description: The CUPS Printing System - daemon package
-      - name: cups-pdf
-        description: PDF printer for cups
-  - name: Storage
-    subgroups:
-      - name: Partitioning
-        subgroups: 
-          - name: Commandline
-            packages:
-              - fdisk
-              - parted
-              - util-linux         
-          - name: Graphical
-            packages:
-              - name: gparted
-                description: GUI frontend for GNU parted
-              - name: gnome-disk-utility
-                description: Default partitioning utility in Gnome 3
-              - name: partitionmanager
-                description: Default partitioning utility in KDE Plasma
-      - name: Filesystems
-        description: Support for various filesystems
-        subgroups: 
-          - name: exFAT
-            description: exFAT support
-            packages: 
-              - exfatprogs
-              - exfat-utils
-          # - name: APFS
-          #   description: (AUR) APFS support
-          #   packages: 
-          #     - linux-apfs-rw-dkms-git
-          #     - apfsprogs-git
-          # - name: Bcachefs
-          #   description: (AUR) Bcachefs support
-          #   packages: 
-          #     - linux-bcachefs-git
-          #     - bcachefs-tools-git
-          # - name: ZFS
-          #   description: (AUR) ZFS support
-          #   packages: 
-          #     - zfs-linux
-          #     - zfs-dkms
-          #     - zfs-utils
-        packages:           
-            - name: dosfstools
-              description: VFAT support
-            - name: e2fsprogs
-              description: ext3 and ext4 support
-            - name: ntfs-3g
-              description: NTFS support          
-            - name: btrfs-progs
-              description: BTRFS support
-            - name: xfsprogs
-              description: XFS support
-            - name: reiserfsprogs
-              description: ReiserFS support
-            - name: f2fs-tools
-              description: F2FS support
-            - name: hfsprogs
-              description: HFS and HFS+ support          
-            - name: jfsutils
-              description: JFS support
-            - name: nilfs-utils
-              description: NILFS2 support          
-            - name: udftools
-              description: UDF support
-            - name: reiser4progs
-              description: Reiser4 support
-  - name: Input
-    description: Input devices like mouse, touchpad, and keyboard
-    packages: 
-      - name: libinput
-        description: Input device management and event handling library
-      - name: xf86-input-libinput
-        description: A thin wrapper around libinput for input devices in X
-      - name: xorg-xinput
-        description: Tools to configure devices at runtime  
-  - name: Virtualization (as Guest)
-    description: Run RebornOS on a VM
-    noncheckable: true
-    subgroups:
-      - name: VirtualBox
-        packages: 
-          - name: virtualbox-guest-utils
-            description: VirtualBox Guest utilities with X support
-          - name: virtualbox-guest-utils-nox
-            description: VirtualBox Guest utilities without X support 
-      - name: VMWare
-        packages: 
-          - name: open-vm-tools
-            description: Suite of open source virtualization utilities and drivers
-          - name: gtkmm3
-            description: C++ bindings for GTK+ 3
-          - name: xf86-video-vmware
-            description: X.org vmware video driver
-          - name: xf86-input-vmmouse
-            description: X.org VMWare Mouse input driver
-          - name: mesa
-            description: Open-source implementation of the OpenGL specification
-      - name: QEMU
-        packages: 
-          - qemu-guest-agent  
-  - name: Remote Desktop Servers
-    description: Let other computers connect remotely
-    noncheckable: true
-    packages:
-      - name: tigervnc
-        description: VNC Server for X displays
-      - name: krfb
-        description: VNC server for KDE. Part of kde-network
-      - name: wayvnc
-        description: VNC server for wlroots based wayland compositors (such as sway)
-      - name: x11vnc
-        description: VNC server for real X displays
-      - name: xpra
-        description: A multi-platform screen and application forwarding system 
+          - name: xf86-video-fbdev
+            selected: true
+            description: Framebuffer device drivers for X (Recommended for PI) 
+    - name: Audio
+      packages:
+        - name: pavucontrol
+          description: Simple GTK volume control tool ("mixer")
+      subgroups:
+        - name: Pipewire
+          description:
+          packages:
+            - name: pipewire
+              description: Low-latency audio/video router and processor
+            # - name: lib32-pipewire
+            #   description: For PipeWire with 32-bit support 
+            - name: pipewire-alsa
+              description: For PipeWire to manage ALSA as well
+            - name: pipewire-pulse
+              description: For PipeWire bluetooth support
+            - name: pipewire-jack
+              description: For PipeWire JACK sink, source and jackdbus detection
+            # - name: lib32-pipewire-jack
+              # description: For 32-bit PipeWire JACK sink, source and jackdbus detection
+            - xdg-desktop-portal
+            - xdg-desktop-portal-gnome
+            - xdg-desktop-portal-kde
+            - xdg-desktop-portal-wlr
+        # - name: PulseAudio
+        #   description:
+        #   packages:
+        #     - name: pulseaudio
+        #       description: A featureful, general-purpose sound server 
+        #     - name: pulseaudio-alsa
+        #       description: For PulseAudio to manage ALSA as well
+        #     - name: pulseaudio-bluetooth
+        #       description: For PulseAudio bluetooth support
+        #     - name: pulseaudio-equalizer
+        #       description: For PulseAudio equalizer sink (qpaeq)
+        #     - name: pulseaudio-jack
+        #       description: For JACK sink, source and jackdbus detection
+        #     - name: pulseaudio-lirc
+        #       description: For PulseAudio infrared volume control with LIRC
+        #     - name: pulseaudio-zeroconf
+        #       description: For PulseAudio Zeroconf (Avahi/DNS-SD) support
+    - name: Network
+      noncheckable: true
+      subgroups:
+        - name: VPN
+          description: Virtual Private Network support
+          packages:
+            - name: openvpn
+              description: Connect to OpenVPN VPNs
+            - name: openconnect
+              description: Supports Cisco and Juniper VPNs
+            - name: wireguard-tools
+              description: Next generation secure network tunnel
+            - name: pptpclient
+              description: Client for the proprietary Microsoft Point-to-Point Tunneling Protocol
+    - name: Bluetooth        
+      packages:
+        - name: bluez
+          description: The Bluetooth protocol stack
+        - name: bluez-utils
+          description: Development and debugging utilities for bluez
+        - name: blueman
+          description: A full featured Bluetooth manager
+    - name: Printing
+      packages:
+        - name: cups
+          description: The CUPS Printing System - daemon package
+        - name: cups-pdf
+          description: PDF printer for cups
+    - name: Storage
+      subgroups:
+        - name: Partitioning
+          subgroups: 
+            - name: Commandline
+              packages:
+                - parted
+                - util-linux         
+            - name: Graphical
+              packages:
+                - name: gparted
+                  description: GUI frontend for GNU parted
+                - name: gnome-disk-utility
+                  description: Default partitioning utility in Gnome 3
+                - name: partitionmanager
+                  description: Default partitioning utility in KDE Plasma
+        - name: Filesystems
+          description: Support for various filesystems
+          subgroups: 
+            - name: exFAT
+              description: exFAT support
+              packages: 
+                - exfatprogs
+                # - exfat-utils
+            # - name: APFS
+            #   description: (AUR) APFS support
+            #   packages: 
+            #     - linux-apfs-rw-dkms-git
+            #     - apfsprogs-git
+            # - name: Bcachefs
+            #   description: (AUR) Bcachefs support
+            #   packages: 
+            #     - linux-bcachefs-git
+            #     - bcachefs-tools-git
+            # - name: ZFS
+            #   description: (AUR) ZFS support
+            #   packages: 
+            #     - zfs-linux
+            #     - zfs-dkms
+            #     - zfs-utils
+          packages:           
+              - name: dosfstools
+                description: VFAT support
+              - name: e2fsprogs
+                description: ext3 and ext4 support
+              - name: ntfs-3g
+                description: NTFS support          
+              - name: btrfs-progs
+                description: BTRFS support
+              - name: xfsprogs
+                description: XFS support
+              - name: reiserfsprogs
+                description: ReiserFS support
+              - name: f2fs-tools
+                description: F2FS support
+              # - name: hfsprogs
+              #   description: HFS and HFS+ support          
+              - name: jfsutils
+                description: JFS support
+              - name: nilfs-utils
+                description: NILFS2 support          
+              - name: udftools
+                description: UDF support
+              # - name: reiser4progs
+              #   description: Reiser4 support
+    - name: Input
+      description: Input devices like mouse, touchpad, and keyboard
+      packages: 
+        - name: libinput
+          description: Input device management and event handling library
+        - name: xf86-input-libinput
+          description: A thin wrapper around libinput for input devices in X
+        - name: xorg-xinput
+          description: Tools to configure devices at runtime  
+    - name: Remote Desktop Servers
+      description: Let other computers connect remotely
+      noncheckable: true
+      packages:
+        - name: tigervnc
+          description: VNC Server for X displays
+        - name: krfb
+          description: VNC server for KDE. Part of kde-network
+        - name: wayvnc
+          description: VNC server for wlroots based wayland compositors (such as sway)
+        - name: x11vnc
+          description: VNC server for real X displays
+        - name: xpra
+          description: A multi-platform screen and application forwarding system 
 - name: Frontend System
   selected: false
   description: For day-to-day usage of the operating system
@@ -720,12 +345,10 @@
       description: A script to get system information
     - name: gnu-netcat
       description: Network piping application. Does not support IPv6 (Required for termbin)
+    - name: base-devel
+      description: Required to build packages 
     - name: network-manager-applet
-      description: Applet for managing network connections  
-    - name: pciutils
-      description: PCI bus configuration space access library and tools
-    - name: usbutils    
-      description: A collection of USB tools to query connected USB devices
+      description: Applet for managing network connections      
     - name: fastfetch
       description: Like Neofetch, but much faster because written in C
     - name: docker
@@ -741,13 +364,13 @@
               description: Linux application sandboxing and distribution framework (formerly xdg-app)
             - name: xdg-desktop-portal
               description: For flatpak apps to interact with your desktop
-        - name: Snap
-          description: Software deployment and package management system
-          packages: 
-            - name: snapd
-              description: Service and tools for management of snap packages
-            - name: apparmor
-              description: Mandatory Access Control (MAC) using Linux Security Module (LSM)
+        # - name: Snap
+        #   description: Software deployment and package management system
+        #   packages: 
+        #     - name: snapd
+        #       description: Service and tools for management of snap packages
+        #     - name: apparmor
+        #       description: Mandatory Access Control (MAC) using Linux Security Module (LSM)
     - name: Theming and Customization
       noncheckable: true
       subgroups:
@@ -911,30 +534,29 @@
           description: Graphical package management tool
     - name: Virtualization (as Host)
       description: Run VMs on RebornOS
-      noncheckable: true
       subgroups: 
-        - name: VirtualBox
-          packages:
-            - name: virtualbox
-              description: Powerful x86 virtualization for enterprise as well as home use
-            - name: virtualbox-host-modules-arch
-              description: Virtualbox host kernel modules for Linux kernel
-            - name: virtualbox-host-dkms
-              description: Virtualbox host kernel modules for other kernels (Install kernel headers too)
-            - name: virtualbox-guest-iso
-              description: Install guest additions onto systems other than Arch Linux
-        - name: VMWare
-          packages: 
-            - name: vmware-workstation
-              description: VMWare
-            - name: fuse2
-              description: Library that makes it possible to implement a filesystem in a userspace program.
-            - name: gtkmm
-              description: GUI for VMWare
-            - linux-headers
-            - ncurses
-            - libcanberra
-            - pcsclite
+        # - name: VirtualBox
+        #   packages:
+        #     - name: virtualbox
+        #       description: Powerful x86 virtualization for enterprise as well as home use
+        #     - name: virtualbox-host-modules-arch
+        #       description: Virtualbox host kernel modules for Linux kernel
+        #     - name: virtualbox-host-dkms
+        #       description: Virtualbox host kernel modules for other kernels (Install kernel headers too)
+        #     - name: virtualbox-guest-iso
+        #       description: Install guest additions onto systems other than Arch Linux
+        # - name: VMWare
+        #   packages: 
+        #     - name: vmware-workstation
+        #       description: VMWare
+        #     - name: fuse2
+        #       description: Library that makes it possible to implement a filesystem in a userspace program.
+        #     - name: gtkmm
+        #       description: GUI for VMWare
+        #     - linux-headers
+        #     - ncurses
+        #     - libcanberra
+        #     - pcsclite
         - name: QEMU
           packages: 
             - name: qemu-full
@@ -942,15 +564,15 @@
             - name: qemu-base
               description: QEMU base without GUI
             - name: qemu-desktop
-              description: x86_64 architecture emulators for full-system emulation
+              description: aarch64 architecture emulators for full-system emulation
             - name: qemu-emulators-full
-              description: x86_64 usermode variant, arm, and other architectures
+              description: aarch64 usermode variant, x86_64, and other architectures
             - name: qemu-block-gluster
               description: QEMU Gluster block driver
             - name: qemu-block-iscsi
               description: QEMU iSCSI block driver
-            - name: qemu-block-rbd
-              description: QEMU Ceph/RBD block driver
+            # - name: qemu-block-rbd
+            #   description: QEMU Ceph/RBD block driver
             - name: qemu-guest-agent
               description: QEMU Guest Agent
           subgroups: 
@@ -984,8 +606,8 @@
           description: Simple VNC Client on Gtk-VNC. Run with gvncviewer        
         - name: virt-viewer
           description: Simple remote display client. Supports SPICE and VNC
-        - name: anydesk-bin
-          description: Proprietary remote desktop software
+        # - name: anydesk-bin
+        #   description: Proprietary remote desktop software
         - name: freerdp
           description: FreeRDP X11 client. Run with xfreerdp
     - name: Security
@@ -1015,14 +637,8 @@
           description: Extensible browser from Mozilla based on Gecko with fast rendering
         - name: chromium
           description: The open source project behind Google Chrome developed by Google 
-        # - name: google-chrome
-        #   description: (AUR) Proprietary web browser developed by Google
-        - name: vivaldi
-          description: An advanced proprietary browser made with the power user in mind
-        # - name: brave-bin
-        #   description: (AUR) Web browser with builtin ad- and tracker blocking
-        - name: opera
-          description: Proprietary browser developed by Opera Software
+        # - name: opera
+        #   description: Proprietary browser developed by Opera Software
         - name: torbrowser-launcher
           description: Securely and easily download, verify, install, and launch Tor Browser, a fork of Firefox ESR
         - name: epiphany
@@ -1031,8 +647,8 @@
           description: Web browser based on Qt toolkit and Qt WebEngine (or KHTML layout engine), part of kde-network
         - name: midori
           description: Lightweight web browser based on GTK and WebKit
-        - name: min
-          description: A fast, minimal browser that protects your privacy. It includes an interface designed to minimize distractions
+        # - name: min
+        #   description: A fast, minimal browser that protects your privacy. It includes an interface designed to minimize distractions
         - name: falkon
           description: Web browser based on QtWebEngine, written in Qt framework
         - name: luakit
@@ -1042,221 +658,131 @@
     - name: Gaming
       description: Play games!
       noncheckable: true
-      packages: 
-        - name: wine
-          description: A compatibility layer capable of running Microsoft Windows games and applications
-        - name: wine-staging 
-          description: a patched version of Wine, which contains bug fixes and features that have not been integrated into the stable or development branch yet
-        # - name: playonlinux
-        #   description: (AUR) Graphical prefix manager for Wine
-        # - name: pywinery
-        #   description: (AUR) Simple graphical prefix manager for Wine
-        # - name: q4wine-git
-        #   description: (AUR) Graphical prefix manager for Wine. Can export Qt themes into the Wine configuration for better integration
-        # - name: proton
-        #   description: (AUR) Compatibility tool made for Steam based on Wine and additional components
-        # - name: bottles
-        #   description: (AUR) Open-Source wine and proton prefix manager. Run windows software and games
-        # - name: play.it
-        #   description: (AUR) Automates the build of native packages. Also supports Wine, DOSBox and ScummVM games
-        - name: wine-gecko
-          description: Wine's built-in replacement for Microsoft's Internet Explorer
-        - name: wine-mono
-          description: Wine's built-in replacement for Microsoft's .NET Framework
-        # - name: crossover
-        #   description: (AUR) Paid, commercialized version of Wine which provides more comprehensive end-user support
-      subgroups: 
-        - name: Stores
+      subgroups:
+        - name: Action and adventure
           noncheckable: true
-          packages:        
-            - name: lutris
-              description: Open gaming platform for Linux for GOG, Steam, Battle.net, Origin, Uplay and many other sources
-            - name: steam
-              description: Digital distribution and communications platform developed by Valve 
-            # - name: athenaeum-git
-            #   description: (AUR) A libre replacement to Steam        
-            # - name: heroic-games-launcher-bin
-            #   description: (AUR) A GUI for legendary, an open-source alternative for the Epic Games Launcher
-            # - name: legendary
-            #   description: (AUR) A free and open-source replacement for the Epic Games Launcher
-            # - name: minigalaxy
-            #   description: "(AUR) Client for the DRM-free game store: GOG"
-            # - name: itch-setup-bin
-            #   description: (AUR) Indie game store
-        - name: Games
+          packages:
+            - name: astromenace
+              description: Modern 3D scrolling space shooter with ship upgrade possibilities
+            - name: bass
+              description: Point-and-click science fiction thriller set in a bleak vision of the future
+            - name: blobwars
+              description: 2D action-adventure game with various weapons and missions
+            - name: kobodeluxe
+              description: An enhanced version of Akira Higuchi's game XKobo, an addictive space shoot'em up
+            - name: kollision
+              description: Moving a ball to avoid other balls
+            - name: kspaceduel
+              description: Destroy opponents satellite and control own one to keep it orbiting
+            # - name: minecraft-launcher
+            #   description: (AUR) Java based sandbox game
+            # - name: neverball
+            #   description: (AUR) 3D game to guide a ball through a maze
+            # - name: rune
+            #   description: (AUR) 3rd person Adventure Hack'n Slay using Unreal Engine
+            - name: uqm
+              description: a port of Star Control 2
+            # - name: airshipper
+            #   description: (AUR) Veloren is an open-world, open-source multiplayer voxel RPG
+        - name: Arcade
           noncheckable: true
-          subgroups:
-            - name: Action and adventure
-              noncheckable: true
-              packages:
-                - name: astromenace
-                  description: Modern 3D scrolling space shooter with ship upgrade possibilities
-                - name: bass
-                  description: Point-and-click science fiction thriller set in a bleak vision of the future
-                - name: blobwars
-                  description: 2D action-adventure game with various weapons and missions
-                - name: kobodeluxe
-                  description: An enhanced version of Akira Higuchi's game XKobo, an addictive space shoot'em up
-                - name: kollision
-                  description: Moving a ball to avoid other balls
-                - name: kspaceduel
-                  description: Destroy opponents satellite and control own one to keep it orbiting
-                # - name: minecraft-launcher
-                #   description: (AUR) Java based sandbox game
-                # - name: neverball
-                #   description: (AUR) 3D game to guide a ball through a maze
-                # - name: rune
-                #   description: (AUR) 3rd person Adventure Hack'n Slay using Unreal Engine
-                - name: uqm
-                  description: a port of Star Control 2
-                # - name: airshipper
-                #   description: (AUR) Veloren is an open-world, open-source multiplayer voxel RPG
-            - name: Arcade
-              noncheckable: true
-              packages:
-                - name: bomber
-                  description: A 2D game with a goal by hitting targets with bombs before their plane crashes into them
-                - name: chromium-bsu
-                  description: Fast paced, arcade-style, top-scrolling space shooter
-                - name: granatier
-                  description: A clone of Bomberman
-                - name: hedgewars
-                  description: Yet another Worms clone, considered to be better than its predecessor by many
-                - name: kapman
-                  description: A clone of PacMan
-                - name: kbreakout
-                  description: Breakout-style game
-                - name: lbreakout2
-                  description: Breakout-style arcade game in the manner of Arkanoid
-                - name: kbounce
-                  description: Building walls to limit amount of space occupied by two balls bouncing off the walls
-                - name: ksnakeduel
-                  description: Snake-like game for 2 players which compete to survive longer than the opponent
-                - name: ltris
-                  description: Arcade version of Tetris
-                - name: mari0
-                  description: The Mario game with Portal gun mechanics
-                - name: quadrapassel
-                  description: A Tetris remake for GNOME
-                - name: teeworlds
-                  description: Fast-paced 2D multiplayer shooter
-            - name: Casual
-              noncheckable: true
-              packages:
-                - name: aisleriot
-                  description: A collection of solitaire card games
-                - name: bsd-games
-                  description: Collection of classic text games distributed with *BSD
-                - name: kajongg
-                  description: An implementation of Mahjong for 4 player
-                - name: kpat
-                  description: A set of solitarire card games
-                - name: ksquares
-                  description: A dots-and-boxes game for two players
-                - name: lskat
-                  description: A variation of Skat card game for two players
-            - name: Chess
-              noncheckable: true
-              packages:
-                - name: gnuchess
-                  description: One of the oldest computer chess programs for Unix-based computers
-                - name: xboard
-                  description: Graphical user interface that supports many chess variants and serves as a fronted for chess services such as engines
-                - name: knights
-                  description: Chess board by KDE with XBoard protocol support
-                - name: pychess
-                  description: An advanced chess client for linux following the GNOME Human Interface Guidelines
-                - name: gnome-chess
-                  description: A 2D chess game which can use third party chess engines
-            - name: Education
-              noncheckable: true
-              packages: 
-                - name: artikulate
-                  description: Pronunciation trainer that helps improving and perfecting a learner's pronunciation skills for a foreign language
-                - name: blinken
-                  description: Sequence-remembering game for training memory
-                - name: gcompris-qt
-                  description: Educational software suite comprising of numerous activities for children aged 2 to 10
-                - name: kanagram
-                  description: Letter order game
-                - name: kbruch
-                  description: Small program to practice calculating with fractions and percentages
-                - name: kgeography
-                  description: Geography learning tool, which allows you to learn about the political divisions of some countries
-                - name: khangman
-                  description: Hangman game
-                - name: klettres
-                  description: Help the user to learn alphabet in a new language and then to learn to read simple syllables
-                - name: minuet
-                  description: Software for music education
-            - name: MMO
-              noncheckable: true
-              packages: 
-                - name: manaplus
-                  description: Serious effort to create an innovative free and open source MMORPG
-            - name: Platformer
-              noncheckable: true
-              packages: 
-                - name: frogatto
-                  description: Platformer with adventure elements
-                - name: kgoldrunner
-                  description: A platform game with the goal of collecting gold
-                - name: supertux
-                  description: Mario-style game featuring Tux
-            - name: Puzzle
-              noncheckable: true
-              packages: 
-                - name: 
-                  description: 
-            - name: Racing
-              noncheckable: true
-              packages: 
-                - name: 
-                  description: 
-            - name: Rogue-like
-              noncheckable: true
-              packages: 
-                - name: 
-                  description:
-            - name: Role-playing games (RPG)
-              noncheckable: true
-              packages: 
-                - name: 
-                  description:  
-            - name: Shooters (FPS, third person)
-              noncheckable: true
-              packages: 
-                - name: 
-                  description:     
-            - name: Simulation
-              noncheckable: true
-              packages: 
-                - name: 
-                  description:    
-            - name: Strategy
-              noncheckable: true
-              packages: 
-                - name: 
-                  description:  
-            - name: Turn based
-              noncheckable: true
-              packages: 
-                - name: 
-                  description: 
-            - name: Tycoon/management
-              noncheckable: true
-              expanded: false
-              selected: false
-              packages: 
-                - name: 
-                  description: 
+          packages:
+            - name: bomber
+              description: A 2D game with a goal by hitting targets with bombs before their plane crashes into them
+            - name: chromium-bsu
+              description: Fast paced, arcade-style, top-scrolling space shooter
+            - name: granatier
+              description: A clone of Bomberman
+            - name: hedgewars
+              description: Yet another Worms clone, considered to be better than its predecessor by many
+            - name: kapman
+              description: A clone of PacMan
+            - name: kbreakout
+              description: Breakout-style game
+            - name: lbreakout2
+              description: Breakout-style arcade game in the manner of Arkanoid
+            - name: kbounce
+              description: Building walls to limit amount of space occupied by two balls bouncing off the walls
+            - name: ksnakeduel
+              description: Snake-like game for 2 players which compete to survive longer than the opponent
+            - name: ltris
+              description: Arcade version of Tetris
+            - name: mari0
+              description: The Mario game with Portal gun mechanics
+            - name: quadrapassel
+              description: A Tetris remake for GNOME
+            - name: teeworlds
+              description: Fast-paced 2D multiplayer shooter
+        - name: Casual
+          noncheckable: true
+          packages:
+            - name: aisleriot
+              description: A collection of solitaire card games
+            - name: bsd-games
+              description: Collection of classic text games distributed with *BSD
+            - name: kajongg
+              description: An implementation of Mahjong for 4 player
+            - name: kpat
+              description: A set of solitarire card games
+            - name: ksquares
+              description: A dots-and-boxes game for two players
+            - name: lskat
+              description: A variation of Skat card game for two players
+        - name: Chess
+          noncheckable: true
+          packages:
+            - name: gnuchess
+              description: One of the oldest computer chess programs for Unix-based computers
+            - name: xboard
+              description: Graphical user interface that supports many chess variants and serves as a fronted for chess services such as engines
+            - name: knights
+              description: Chess board by KDE with XBoard protocol support
+            - name: pychess
+              description: An advanced chess client for linux following the GNOME Human Interface Guidelines
+            - name: gnome-chess
+              description: A 2D chess game which can use third party chess engines
+        - name: Education
+          noncheckable: true
+          packages: 
+            - name: artikulate
+              description: Pronunciation trainer that helps improving and perfecting a learner's pronunciation skills for a foreign language
+            - name: blinken
+              description: Sequence-remembering game for training memory
+            - name: gcompris-qt
+              description: Educational software suite comprising of numerous activities for children aged 2 to 10
+            - name: kanagram
+              description: Letter order game
+            - name: kbruch
+              description: Small program to practice calculating with fractions and percentages
+            - name: kgeography
+              description: Geography learning tool, which allows you to learn about the political divisions of some countries
+            - name: khangman
+              description: Hangman game
+            - name: klettres
+              description: Help the user to learn alphabet in a new language and then to learn to read simple syllables
+            - name: minuet
+              description: Software for music education
+        - name: MMO
+          noncheckable: true
+          packages: 
+            - name: manaplus
+              description: Serious effort to create an innovative free and open source MMORPG
+        - name: Platformer
+          noncheckable: true
+          packages: 
+            - name: frogatto
+              description: Platformer with adventure elements
+            - name: kgoldrunner
+              description: A platform game with the goal of collecting gold
+            - name: supertux
+              description: Mario-style game featuring Tux
     - name: Instant Messaging
       description: Apps for messaging and chatting
       noncheckable: true
       subgroups:
         - name: IRC Clients
-          description: Clients for Internet Relay Chat (IRC)
           noncheckable: true
+          description: Clients for Internet Relay Chat (IRC)
           packages:
             - name: hexchat
               description: Easy to use GTK IRC client based on XChat
@@ -1270,10 +796,9 @@
               description: Qt-based IRC client for the KDE desktop
         - name: Matrix Clients
           description: Clients for Matrix, a decentralised conversation store
-          noncheckable: true
           packages:
-            - name: element-desktop
-              description: Glossy Matrix client with an emphasis on performance and usability
+            # - name: element-desktop
+            #   description: Glossy Matrix client with an emphasis on performance and usability
             - name: neochat
               description: KDE client for the Matrix protocol
             - name: fractal
@@ -1304,8 +829,8 @@
           description: Media player (audio and video) for the GNOME desktop that uses GStreamer        
         - name: gnome-mplayer
           description: Simple GTK-based GUI for MPlayer
-        - name: kodi
-          description: Media player and entertainment hub for digital media
+        - name: kodi-rpi
+          description: Media player and entertainment hub for digital media for the raspberry pi 3b+/4/400
         - name: glide
           description: Simple and minimalistic media player relying on GStreamer for the multimedia support and GTK for the user interface
         - name: maui-clip
@@ -1329,8 +854,8 @@
           description: Audio player written with GTK, Python and GStreamer with support for regular expressions in playlists
         - name: pragha
           description: A lightweight two-panel GTK music manager written in C
-    - name: Image Viewers    
-      noncheckable: true  
+    - name: Image Viewers
+      noncheckable: true 
       packages:
         - name: eog
           description: Image viewing and cataloging program, which is a part of the GNOME desktop environment 
@@ -1338,8 +863,8 @@
           description: Fast and easy to use image viewer for the KDE desktop
         - name: gthumb
           description: Image viewer and browser for the GNOME desktop     
-        - name: mirage
-          description: (AUR) PyGTK image viewer featuring support for crop and resize, custom actions and a thumbnail panel
+        # - name: mirage
+        #   description: (AUR) PyGTK image viewer featuring support for crop and resize, custom actions and a thumbnail panel
         - name: digikam
           description:  KDE-based image organizer with built-in editing features via a plugin architecture
         - name: shotwell
@@ -1357,8 +882,8 @@
         #   description: (AUR) Easily find live radio programs based on geographical location of radio broadcasters on the Internet
         # - name: goodvibes
         #   description: (AUR) Lightweight internet radio player
-        - name: spotify-launcher
-          description: Manages a spotify installation in your home folder from the official spotify release server
+        # - name: spotify-launcher
+        #   description: Manages a spotify installation in your home folder from the official spotify release server
         # - name: spotify
         #   description: (AUR) Proprietary music streaming service (requires a free account)
         # - name: gpmdp
@@ -1406,14 +931,13 @@
           description: Actively developed fork of KOffice, the KDE office suite
         # - name: openoffice-bin
         #   description: (AUR) Open-source office software suite for word processing, spreadsheets, presentations, graphics, databases and more
-        - name: freeoffice
-          description: (AUR) Microsoft Office-compatible proprietary office suite with a word processor, spreadsheet, and presentation graphics software
-        - name: onlyoffice-bin
-          description: (AUR) Office suite that combines text, spreadsheet and presentation editors
-        - name: wps-office
-          description: (AUR) Proprietary office productivity suite, previously known as Kingsoft Office
-        - name: yozo-office
-          description: (AUR) Proprietary office suite, compatible with MS Office
+        # - name: freeoffice
+        #   description: (AUR) Microsoft Office-compatible proprietary office suite with a word processor, spreadsheet, and presentation graphics software
+
+        # - name: wps-office
+        #   description: (AUR) Proprietary office productivity suite, previously known as Kingsoft Office
+        # - name: yozo-office
+        #   description: (AUR) Proprietary office suite, compatible with MS Office
     - name: Email Clients
       noncheckable: true
       packages:
@@ -1565,8 +1089,8 @@
     - name: Screen Recording
       noncheckable: true
       packages:
-        - name: obs-studio
-          description: Video recording and live streaming application
+        # - name: obs-studio
+        #   description: Video recording and live streaming application
         - name: vokoscreen
           description: Simple screencast GUI tool using GStreamer
         - name: peek
@@ -1578,8 +1102,8 @@
     - name: Video Conversion
       noncheckable: true
       packages: 
-        - name: handbrake
-          description: Simple yet powerful video transcoder ideal for batch mkv/x264 ripping. GTK version
+        # - name: handbrake
+        #   description: Simple yet powerful video transcoder ideal for batch mkv/x264 ripping. GTK version
         - name: ciano
           description: Simple multimedia file converter using FFmpeg and ImageMagick
         - name: transmageddon
@@ -1759,19 +1283,9 @@
               description: "Evented I/O for V8 javascript (LTS release: Gallium)"
             - name: npm
               description: A package manager for javascript
-            - name: electron
+            - name: electron20
               description: Build cross platform desktop apps with web technologies
-            - name: electron12
-              description: Build cross platform desktop apps with web technologies
-            - name: electron13
-              description: Build cross platform desktop apps with web technologies
-            - name: electron14
-              description: Build cross platform desktop apps with web technologies
-            - name: electron15
-              description: Build cross platform desktop apps with web technologies
-            - name: electron16
-              description: Build cross platform desktop apps with web technologies
-            - name: electron17
+            - name: electron19
               description: Build cross platform desktop apps with web technologies
     - name: Build Systems
       noncheckable: true
@@ -1787,15 +1301,15 @@
       packages:
         - name: git
           description: The fast distributed version control system
-        - name: gitkraken
-          description: The intuitive, fast, and beautiful cross-platform Git client
+        # - name: gitkraken
+        #   description: The intuitive, fast, and beautiful cross-platform Git client
         - name: git-cola
           description: The highly caffeinated Git GUI
         - name: git-lfs
           description: Git extension for versioning large files
-        - name: smartgit
-          description:  	Git client with Hg and SVN support
-        - name: sublime-merge
-          description: Meet a new Git Client, from the makers of Sublime Text
-        - name: subversion
-          description: A modern concurrent version control system      
+        # - name: smartgit
+        #   description:  	Git client with Hg and SVN support
+        # - name: sublime-merge
+        #   description: Meet a new Git Client, from the makers of Sublime Text
+        # - name: subversion
+        #   description: A modern concurrent version control system      

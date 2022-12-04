@@ -1,4 +1,4 @@
-# Calamares Configuration for RebornOS
+# Raspberry Pi Calamares Configuration for RebornOS
 
 > **Note**: This project only carries RebornOS-specific configuration except for the installer packaging files (PKGBUILD, build scripts), icons, and launch scripts. For the rest of the installer's source code and for the above exceptions, please use the [calamares-core](https://github.com/RebornOS-Developers/calamares-core) project.
 
@@ -11,7 +11,7 @@ In order to download the source code to your local computer for testing, or for 
 ### HTTPS
 
 ```bash
-git clone https://github.com/RebornOS-Developers/calamares-configuration.git 
+git clone https://github.com/RebornOS-Developers/calamares-configuration-rpi.git 
 ```
 
 OR
@@ -19,7 +19,7 @@ OR
 ### SSH
 
 ```bash
-git clone git@github.com:RebornOS-Developers/calamares-configuration.git
+git clone git@github.com:RebornOS-Developers/calamares-configuration-rpi.git
 ```
 
 ## Packaging
@@ -30,9 +30,9 @@ Change to the project directory (`cd calamares-configuration`) and run any of th
 - `sh packaging/install-package.sh <MODE>`: Just installs a package locally, except if no built package is detected, a package is built.
 
 - where `<MODE>` can be one of the below
-     1. `local`: Selects *calamares-configuration-local* from the local project that you have cloned already.
+     1. `local`: Selects *calamares-configuration- local* from the local project that you have cloned already.
      2. `git`: Selects *calamares-configuration-git* from the latest git commit.
-     3. `stable`: Selects *calamares-configuration* from the git tag corresponding to the [`pkgver` specified in the PKGBUILD](https://github.com/RebornOS-Developers/calamares-configuration/blob/main/packaging/calamares-configuration/PKGBUILD#L4). If `pkgver=0.1.2`, then the git tag `v0.1.2` is used for packaging. 
+     3. `stable`: Selects *calamares-configuration* from the git tag corresponding to the [`pkgver` specified in the PKGBUILD](https://github.com/RebornOS-Developers/calamares-configuration-rpi/blob/main/packaging/calamares-configuration/PKGBUILD#L4). If `pkgver=0.1.2`, then the git tag `v0.1.2` is used for packaging. 
      
 > **Note**: Any additional parameters passed to the above scripts are automatically sent to `makepkg` or `pacman` (whichever is applicable).
 
