@@ -11,7 +11,12 @@ license=('GPL3')
 depends=('python' 'python-yaml')
 optdepends=('calamares')
 provides=('calamares-config')
-conflicts=('calamares-configuration' 'calamares-configuration-git' 'calamares-configuration-local')
+conflicts=('calamares-configuration'
+           'calamares-configuration-git'
+           'calamares-configuration-local'
+           'calamares-configuration-rpi'
+           'calamares-configuration-rpi-git'
+           'calamares-configuration-rpi-local')
 md5sums=()
 makedepends=() 
 
