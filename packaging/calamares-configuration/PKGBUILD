@@ -100,15 +100,15 @@ package() {
             -exec \
                 install -Dm 700 "{}" "${pkgdir}/$DIST_DIRECTORY_STUB/{}" \;
     )
-    (   # -------------------
-        # Copy local packages
-        # -------------------
-        cd "$DIST_DIRECTORY" && \
-        find local_packages \
-            -type f \
-            -exec \
-                install -Dm 700 "{}" "${pkgdir}/$DIST_DIRECTORY_STUB/{}" \;
-    )
+    # (   # -------------------
+    #     # Copy local packages
+    #     # -------------------
+    #     cd "$DIST_DIRECTORY" && \
+    #     find local_packages \
+    #         -type f \
+    #         -exec \
+    #             install -Dm 700 "{}" "${pkgdir}/$DIST_DIRECTORY_STUB/{}" \;
+    # )
     (   # -------------------
         # Copy custom modules
         # -------------------
