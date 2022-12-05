@@ -24,15 +24,15 @@ git clone git@github.com:RebornOS-Developers/calamares-configuration-rpi.git
 
 ## Packaging
 
-Change to the project directory (`cd calamares-configuration`) and run any of the below scripts:
+Change to the project directory (`cd calamares-configuration-rpi`) and run any of the below scripts:
 - `sh packaging/setup.sh <MODE>`: Builds and installs a package
 - `sh packaging/build-package.sh <MODE>`: Just builds a package without installing it locally
 - `sh packaging/install-package.sh <MODE>`: Just installs a package locally, except if no built package is detected, a package is built.
 
 - where `<MODE>` can be one of the below
-     1. `local`: Selects *calamares-configuration- local* from the local project that you have cloned already.
-     2. `git`: Selects *calamares-configuration-git* from the latest git commit.
-     3. `stable`: Selects *calamares-configuration* from the git tag corresponding to the [`pkgver` specified in the PKGBUILD](https://github.com/RebornOS-Developers/calamares-configuration-rpi/blob/main/packaging/calamares-configuration/PKGBUILD#L4). If `pkgver=0.1.2`, then the git tag `v0.1.2` is used for packaging. 
+     1. `local`: Selects *calamares-configuration-rpi-local* from the local project that you have cloned already.
+     <!-- 2. `git`: Selects *calamares-configuration-rpi-git* from the latest git commit. -->
+     2. `stable`: Selects *calamares-configuration-rpi* from the git tag corresponding to the [`pkgver` specified in the PKGBUILD](https://github.com/RebornOS-Developers/calamares-configuration-rpi/blob/main/packaging/calamares-configuration/PKGBUILD#L4). If `pkgver=0.1.2`, then the git tag `v0.1.2` is used for packaging. 
      
 > **Note**: Any additional parameters passed to the above scripts are automatically sent to `makepkg` or `pacman` (whichever is applicable).
 
