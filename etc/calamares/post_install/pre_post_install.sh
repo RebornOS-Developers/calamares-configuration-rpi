@@ -16,11 +16,15 @@ else
     rm /etc/systemd/system/display-manager.service || true
     #try to enable common display managers but dont crash if they are not installed
     systemctl enable lightdm.service || true
+    systemctl enable tdm.service || true
     systemctl enable gdm.service || true
     systemctl enable lxdm.service || true
     systemctl enable slim.service || true
     systemctl enable mdm.service || true
     systemctl enable sddm.service || true
+    if [ -f /opt/trinity/bin/tdm ] ; then
+        { echo "MaxShowUID=65000"; echo "MinShowUID=1000"; echo "ShowUsers=NotHidden"; } >> /opt/trinity/config/tdm/tdmrc
+    fi
     echo "Removinging LXQt..."
     pacman -Rncsu --noconfirm rebornos-cosmic-lxqt
 

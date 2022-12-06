@@ -23,7 +23,7 @@ makedepends=()
 source=("https://github.com/RebornOS-Developers/calamares-configuration-rpi/archive/refs/tags/v${pkgver}.tar.gz")
 
 package() {
-    PROJECT_DIRECTORY="${srcdir}/calamares-configuration-${pkgver}"
+    PROJECT_DIRECTORY="${srcdir}/calamares-configuration-rpi-${pkgver}"
     # RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging/resources"
     # BUILD_DIRECTORY="$PROJECT_DIRECTORY/build"
     # NUMBER_OF_PROCESSORS="$(nproc)"
