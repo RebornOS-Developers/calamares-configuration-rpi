@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+#   SPDX-FileCopyrightText: 2022 Panda <panda@rebornos.org>
+
 import os
 import shutil
 from typing import Optional, Union, Dict, List
@@ -38,15 +43,19 @@ cumulative_package_list: list[str] = []
 def run():
     packagechooser = libcalamares.globalstorage.value("netinstallAdd")
     package = libcalamares.job.configuration["package"]
-    pre_commands = libcalamares.job.configuration["pre_install"]
+    pre_commands = libcalamares.job.configuration["pre-install"]
     netinstall = libcalamares.globalstorage.value("packageOperations")
     print(netinstall)
     pick_out_packages(item= packagechooser, cumulative_package_list= cumulative_package_list)
     print(pre_commands)
     if package in cumulative_package_list:
-        libcalamares.utils.debug("Match found")
+        libcalamares.utils.debug("Running pre-install commands for: {}".format(package))
         for command in pre_commands:
-            command_ = command.split(' ')
+            command_ = [
+                "/usr/bin/sh",
+                "-c",
+                command,
+            ]
             libcalamares.utils.debug("Running command: {}".format(command))
             libcalamares.utils.target_env_call(command_)
     else:
