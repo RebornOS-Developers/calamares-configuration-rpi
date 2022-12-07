@@ -23,7 +23,12 @@ else
     systemctl enable mdm.service || true
     systemctl enable sddm.service || true
     if [ -f /opt/trinity/bin/tdm ] ; then
-        { echo "MaxShowUID=65000"; echo "MinShowUID=1000"; echo "ShowUsers=NotHidden"; } >> /opt/trinity/config/tdm/tdmrc
+        touch /var/log/tdm.log
+        cat <<EOF >> /opt/trinity/share/config/tdm/tdmrc
+MaxShowUID=65000
+MinShowUID=1000
+ShowUsers=NotHidden
+EOF
     fi
     echo "Removinging LXQt..."
     pacman -Rncsu --noconfirm rebornos-cosmic-lxqt
