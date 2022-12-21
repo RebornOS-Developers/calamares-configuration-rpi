@@ -32,5 +32,8 @@ EOF
     fi
     echo "Removinging LXQt..."
     pacman -Rncsu --noconfirm rebornos-cosmic-lxqt
-
+    if [ -f /tmp/sddm ]; then
+        sudo pacman -S --noconfirm sddm
+        sudo systemctl enable sddm.service || true
+    fi
 fi 

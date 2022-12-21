@@ -1,7 +1,7 @@
 # Maintainer: shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
-pkgname=calamares-configuration-rpi-local
-pkgver=v0.1.4.r0.ga93ad37
+pkgname=calamares-configuration-rpi
+pkgver=0.5.6
 pkgrel=1
 
 arch=('any')
@@ -22,15 +22,14 @@ makedepends=()
 
 source=()
 
-pkgver() {        
-    PROJECT_DIRECTORY="$(dirname -- "$(dirname -- "$(dirname -- "$(pwd)")")")"     
-
-    ( cd "$PROJECT_DIRECTORY" 
-        set -o pipefail
-        git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
-        printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-    )
-}
+# pkgver() {        
+#     PROJECT_DIRECTORY="$(dirname -- "$(dirname -- "$(dirname -- "$(pwd)")")")"     
+#     ( cd "$PROJECT_DIRECTORY" 
+#         set -o pipefail
+#         git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+#         printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+#     )
+# }
 
 package() {
     PROJECT_DIRECTORY="$(dirname -- "$(dirname -- "$(dirname -- "$(pwd)")")")"
